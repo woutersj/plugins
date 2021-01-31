@@ -34,8 +34,8 @@ from tmpy.completion import parse_complete_command, complete
 from tmpy.protocol   import *
 
 if py_ver == 2:
-    flush_err ("Python 2 is no longer supported, please use Python 3")
-    exit (-1)
+    flush_err ("Python 2 is no longer supported and may stop working in TeXmacs at any time, please use Python 3")
+#    exit (-1)
 
 # import logging as log
 # log.basicConfig(filename='/tmp/tm_python.log',level=log.INFO)
@@ -132,7 +132,11 @@ flush_verbatim ("Python " + sys.version + "\n" +
                "Please see the documentation in Help -> Plugins -> Python")
 flush_prompt (">>> ")
 while True:
-    line= input ()
+    # raw_input for v2, input for v3
+    if py_ver == 2:
+        line= raw_input ()
+    else:
+        line= input ()
     if not line:
         continue
     if line[0] == DATA_COMMAND:
@@ -151,7 +155,10 @@ while True:
     else:
         lines= [line]
         while line != "<EOF>":
-            line= input ()
+            if py_ver == 2:
+                line= raw_input ()
+            else:
+                line= input ()
             if line == '': 
                 continue
             lines.append (line)
