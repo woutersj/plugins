@@ -27,7 +27,7 @@ import traceback
 import string
 import ast
 from inspect   import ismodule, getsource, getsourcefile
-from tmpy.compat import py_ver
+from tmpy.compat import py_ver, tm_input
 from tmpy.capture import CaptureStdout
 from tmpy.postscript import ps_out, PSOutDummy, pdf_out, FileOutDummy
 from tmpy.completion import parse_complete_command, complete
@@ -132,11 +132,7 @@ flush_verbatim ("Python " + sys.version + "\n" +
                "Please see the documentation in Help -> Plugins -> Python")
 flush_prompt (">>> ")
 while True:
-    # raw_input for v2, input for v3
-    if py_ver == 2:
-        line= raw_input ()
-    else:
-        line= input ()
+    line= tm_input ()
     if not line:
         continue
     if line[0] == DATA_COMMAND:
@@ -155,10 +151,7 @@ while True:
     else:
         lines= [line]
         while line != "<EOF>":
-            if py_ver == 2:
-                line= raw_input ()
-            else:
-                line= input ()
+            line= tm_input ()
             if line == '': 
                 continue
             lines.append (line)
