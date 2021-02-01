@@ -116,7 +116,11 @@ e.g from files or from matplotlib.pyplot.
 A rudimentary help window is also implemented: type the name of an object
 with a question mark at the end to use it."""
 
-text = 'import builtins as __builtins__'
+
+if py_ver == 3:
+    text = 'import builtins as __builtins__'
+else:
+    text = 'import __builtin__ as __builtins__'
 CaptureStdout.capture (text, my_globals, "tm_python")
 
 sys.stdout = os.fdopen (sys.stdout.fileno(), 'w')
