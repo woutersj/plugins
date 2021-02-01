@@ -26,8 +26,6 @@
 ;; An alternative approach is to use the input-done? command
 ;; from TeXmacs, but, at the time of this writing, it did not work.--A
 
-(define (python-command) "python2")
-
 (define (python-serialize lan t)
   (with u (pre-serialize lan t)
     (with s (texmacs->code (stree->tree u) "SourceCode")
